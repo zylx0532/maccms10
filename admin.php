@@ -1,11 +1,10 @@
 <?php
 /*
 '软件名称：苹果CMS
-'开发作者：MagicBlack  QQ：479025  官方网站：http://www.maccms.com/
+'开发作者：MagicBlack  官方网站：http://www.maccms.com/
 '--------------------------------------------------------
-'适用本程序需遵循 CC BY-ND 许可协议
-'这不是一个自由软件！您只能在不用于商业目的的前提下对程序代码进行修改和使用；
-'不允许对程序代码以任何形式任何目的的再发布。
+'Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+'遵循Apache2开源协议发布，并提供免费使用。
 '--------------------------------------------------------
 */
 header('Content-Type:text/html;charset=utf-8');
@@ -32,6 +31,10 @@ define('IN_FILE',$in_file);
 
 if(!is_file('./application/data/install/install.lock')) {
     header("Location: ./install.php");
+    exit;
+}
+if(strpos($_SERVER["SCRIPT_NAME"],'/admin.php')!==false){
+    echo '请将后台入口文件admin.php改名,避免被黑客入侵攻击';
     exit;
 }
 if (!@mb_check_encoding($_SERVER['PATH_INFO'], 'utf-8')){

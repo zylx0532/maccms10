@@ -176,6 +176,8 @@ class User extends Base
             }
         }
 
+
+
         $fields = [];
         $fields['user_name'] = $data['user_name'];
         $fields['user_pwd'] = md5($data['user_pwd']);
@@ -199,7 +201,12 @@ class User extends Base
             $update['user_phone'] = '';
             $where2=[];
             $where2['user_phone'] = $param['to'];
-            $this->where($where2)->update($update);
+
+            $row = $this->where($where2)->find();
+            if (!empty($row)) {
+                return ['code' => 1011, 'msg' => '手机号已被使用，请更换'];
+            }
+            //$this->where($where2)->update($update);
         }
         elseif($config['user']['reg_email_sms'] == '1'){
             $param['type'] = 3;
@@ -213,7 +220,12 @@ class User extends Base
             $update['user_email'] = '';
             $where2=[];
             $where2['user_email'] = $param['to'];
-            $this->where($where2)->update($update);
+
+            $row = $this->where($where2)->find();
+            if (!empty($row)) {
+                return ['code' => 1012, 'msg' => '邮箱已被使用，请更换'];
+            }
+            //$this->where($where2)->update($update);
         }
 
         $res = $this->insert($fields);
@@ -292,6 +304,9 @@ class User extends Base
         $data = [];
         $data['user_id'] = $GLOBALS['user']['user_id'];
         $data['user_name'] = $GLOBALS['user']['user_name'];
+        if(!empty($param['user_nick_name'])){
+            $data['user_nick_name'] = htmlspecialchars(urldecode(trim($param['user_nick_name'])));
+        }
         $data['user_qq'] = htmlspecialchars(urldecode(trim($param['user_qq'])));
         $data['user_question'] = htmlspecialchars(urldecode(trim($param['user_question'])));
         $data['user_answer'] = htmlspecialchars(urldecode(trim($param['user_answer'])));
@@ -636,7 +651,7 @@ class User extends Base
             $msg = $sign.'的会员您好，'.$GLOBALS['user']['user_name'].'。'.$type_des.'验证码为：'. $code .',请在5分钟内完成验证。' ;
             $msg = str_replace(['[用户]','[类型]','[时长]','[验证码]'],[$GLOBALS['user']['user_name'],$type_des,'5',$code],$msg);
 
-            $res_send = mac_send_mail($to, $sign.$title, $sign.$msg);
+            $res_send = mac_send_mail($to, $sign.$title, $msg);
             if($res_send){
                 $r=1;
             }

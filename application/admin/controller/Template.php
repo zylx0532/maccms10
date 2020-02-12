@@ -166,18 +166,20 @@ class Template extends Base
             return;
         }
         $path = pathinfo($fullname);
-
-        $extarr = array('','html','htm','js','xml');
-        if(!in_array($path['extension'],$extarr)){
-            $this->error('参数错误，后缀名只允许htm,html,js,xml');
-            return;
+        if(!empty($fname)) {
+            $extarr = array('html', 'htm', 'js', 'xml');
+            if (!in_array($path['extension'], $extarr)) {
+                $this->error('参数错误，后缀名只允许htm,html,js,xml');
+                return;
+            }
         }
 
-
         if (Request()->isPost()) {
-
-
             $fcontent = $param['fcontent'];
+            if(strpos($fcontent,'<?')!==false){
+                $this->error('安全提示，模板中包含php代码禁止在后台编辑');
+                return;
+            }
             $res = @fwrite(fopen($fullname,'wb'),$fcontent);
 
             if($res===false){
@@ -205,6 +207,7 @@ class Template extends Base
             }
             foreach($fname as $a){
                 $a = str_replace('\\','/',$a);
+
                 if( (substr($a,0,10) != "./template") || count( explode("./",$a) ) > 2) {
 
                 }

@@ -15,15 +15,21 @@ class Actor extends Base
         return $this->label_fetch('actor/index');
     }
 
+    public function type()
+    {
+        $info = $this->label_type();
+        return $this->label_fetch( mac_tpl_fetch('actor',$info['type_tpl'],'type') );
+    }
+
     public function show()
     {
-        $info = $this->label_actor();
-        return $this->label_fetch('actor/show');
+        $info = $this->label_type();
+        return $this->label_fetch( mac_tpl_fetch('actor',$info['type_tpl_list'],'show') );
     }
 
     public function ajax_show()
     {
-        $info = $this->label_actor();
+        $info = $this->label_type();
         return $this->label_fetch('actor/ajax_show');
     }
 
@@ -33,6 +39,14 @@ class Actor extends Base
         $this->check_search($param);
         $this->assign('param',$param);
         return $this->label_fetch('actor/search');
+    }
+
+    public function ajax_search()
+    {
+        $param = mac_param_url();
+        $this->check_search($param);
+        $this->assign('param',$param);
+        return $this->label_fetch('actor/ajax_search');
     }
 
     public function detail()

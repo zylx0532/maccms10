@@ -205,7 +205,7 @@
                 <th width="30">浏览</th>
                 <th width="80">播放器</th>
                 <th width="120">更新时间</th>
-                <th width="80">操作</th>
+                <th width="130">操作</th>
             </tr>
             </thead>
 
@@ -214,7 +214,7 @@
                 <td><input type="checkbox" name="ids[]" value="{$vo.vod_id}" class="layui-checkbox checkbox-ids" lay-skin="primary"></td>
                 <td>{$vo.vod_id}</td>
                 <td>
-                    [{$vo.type.type_name}] <a target="_blank" class="layui-badge-rim " href="{:mac_url_vod_detail($vo)}">{$vo.vod_name}</a>
+                    [{$vo.type.type_name}] <a target="_blank" class="layui-badge-rim " href="{:mac_url_vod_detail($vo)}">{$vo.vod_name|htmlspecialchars}</a>
                     {if condition="$vo.vod_status eq 0"} <span class="layui-badge">未审</span>{/if}
                     {if condition="$vo.vod_lock eq 1"} <span class="layui-badge">锁定</span>{/if}
                     {if condition="$vo.vod_isend eq 0 && $vo.vod_serial neq ''"} <span class="layui-badge layui-bg-blue">连载{$vo.vod_serial}</span>{/if}
@@ -230,6 +230,7 @@
                 <td>
                     <a class="layui-badge-rim j-iframe" data-full="1" data-href="{:url('info?id='.$vo['vod_id'])}" href="javascript:;" title="编辑">编辑</a>
                     <a class="layui-badge-rim j-tr-del" data-href="{:url('del?ids='.$vo['vod_id'])}" href="javascript:;" title="删除">删除</a>
+                    <a class="layui-badge-rim j-iframe" data-full="1"  data-href="{:url('role/data?select=1&tab=vod&rid='.$vo['vod_id'])}" href="javascript:;" title="角色">角色</a>
                 </td>
             </tr>
             {/volist}

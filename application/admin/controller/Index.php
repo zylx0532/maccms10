@@ -32,10 +32,16 @@ class Index extends Base
     public function index()
     {
         $menus = @include MAC_ADMIN_COMM . 'auth.php';
+
         foreach($menus as $k1=>$v1){
             foreach($v1['sub'] as $k2=>$v2){
                 if($v2['show'] == 1) {
-                    $url = url( 'admin/'.$v2['controller'] . '/' . $v2['action']);
+                    if(strpos($v2['action'],'javascript')!==false){
+                        $url = $v2['action'];
+                    }
+                    else {
+                        $url = url('admin/' . $v2['controller'] . '/' . $v2['action']);
+                    }
                     if (!empty($v2['param'])) {
                         $url .= '?' . $v2['param'];
                     }
@@ -57,6 +63,7 @@ class Index extends Base
 
         $quickmenu = mac_read_file( APP_PATH.'data/config/quickmenu.txt');
         if(!empty($quickmenu)){
+            $menus[1]['sub'][13] = ['name'=>'↓↓↓自定义菜单区域↓↓↓', 'url'=>'javascript:void(0);return false;','controller'=>'', 'action'=>'' ];
             $arr = explode(chr(13),$quickmenu);
             foreach($arr as $k=>$v){
                 if(empty($v)){
@@ -69,10 +76,13 @@ class Index extends Base
                 elseif(substr($one[1],0,1) =='/'){
 
                 }
+                elseif(strpos($one[1],'###')!==false || strpos($one[1],'javascript:')!==false){
+
+                }
                 else{
                     $one[1] = url($one[1]);
                 }
-                $menus[1]['sub'][13 + $k] = ['name'=>$one[0], 'url'=>$one[1],'controller'=>'', 'action'=>'' ];
+                $menus[1]['sub'][14 + $k] = ['name'=>$one[0], 'url'=>$one[1],'controller'=>'', 'action'=>'' ];
             }
         }
         $this->assign('menus',$menus);
@@ -147,6 +157,13 @@ class Index extends Base
         return $this->success('解锁成功');
     }
 
+    public function check_back_link()
+    {
+        $param = input();
+        $res = mac_check_back_link($param['url']);
+        return json($res);
+    }
+
     public function select()
     {
         $param = input();
@@ -175,6 +192,12 @@ class Index extends Base
         $mid = 1;
         if($tab=='art'){
             $mid = 2;
+        }
+        elseif($tab=='actor'){
+            $mid=8;
+        }
+        elseif($tab=='website'){
+            $mid=11;
         }
         $this->assign('mid',$mid);
 

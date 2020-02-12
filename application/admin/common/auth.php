@@ -3,7 +3,7 @@ return array(
 
     '1' => array('name' => '首页', 'icon' => 'xe625', 'sub' => array(
         '11' => array("show"=>1,"name" => '欢迎页面', 'controller' => 'index', 'action' => 'welcome'),
-        '12' => array("show"=>1,"name" => '快捷菜单配置', 'controller' => 'index', 'action' => 'quickmenu'),
+        '12' => array("show"=>1,"name" => '自定义菜单配置', 'controller' => 'index', 'action' => 'quickmenu'),
 
         '1001' => array("show"=>0,"name" => '--切换布局', 'controller' => 'index', 'action' => 'iframe'),
         '1002' => array("show"=>0,"name" => '--清理缓存', 'controller' => 'index', 'action' => 'clear'),
@@ -31,7 +31,7 @@ return array(
         '291' => array("show"=>1,"name" => '邮件发送配置', 'controller' => 'system',			'action' => 'configemail'),
         '292' => array("show"=>1,"name" => '短信发送配置', 'controller' => 'system',			'action' => 'configsms'),
 
-        '2910' => array("show"=>1,"name" => '定时任务', 'controller' => 'timming',	'action' => 'index'),
+        '2910' => array("show"=>1,"name" => '定时任务配置', 'controller' => 'timming',	'action' => 'index'),
         '2911' => array("show"=>0,'name' => '--定时任务信息维护', 'controller' => 'type',		'action' => 'info'),
         '2912' => array("show"=>0,'name' => '--定时任务删除', 'controller' => 'type',		'action' => 'del'),
         '2913' => array("show"=>0,'name' => '--定时任务状态', 'controller' => 'type',		'action' => 'field'),
@@ -75,6 +75,22 @@ return array(
         '3602' => array("show"=>0,'name' => '--同步图片选项', 'controller' => 'images',		'action' => 'opt'),
         '3603' => array("show"=>0,'name' => '--同步图片方法', 'controller' => 'images',		'action' => 'sync'),
     )),
+
+    '5' => array('name' => '文章', 'icon' => 'xe616', 'sub' => array(
+
+        '51' => array("show"=>1,'name' => '文章数据', 'controller' => 'art',		'action' => 'data'),
+        '5101' => array("show"=>0,'name' => '--文章信息维护', 'controller' => 'art',		'action' => 'info'),
+        '5102' => array("show"=>0,'name' => '--文章删除', 'controller' => 'art',		'action' => 'del'),
+        '5103' => array("show"=>0,'name' => '--文章状态', 'controller' => 'art',		'action' => 'field'),
+
+        '52' => array("show"=>1,'name' => '添加文章', 'controller' => 'art',		'action' => 'info'),
+        '53' => array("show"=>1,'name' => '已锁定文章', 'controller' => 'art',		'action' => 'data','param'=>'lock=1'),
+        '54' => array("show"=>1,'name' => '未审核文章', 'controller' => 'art',		'action' => 'data','param'=>'status=0'),
+
+        '59' => array("show"=>1,'name' => '批量操作文章', 'controller' => 'art',		'action' => 'batch'),
+        '591' => array("show"=>1,'name' => '重名文章数据', 'controller' => 'art',		'action' => 'data', 'param'=>'repeat=1'),
+    )),
+
 
     '4' => array('name' => '视频', 'icon' => 'xe639', 'sub' => array(
         '41' => array("show"=>1,'name' => '服务器组', 'controller' => 'vodserver',		'action' => 'index'),
@@ -121,19 +137,20 @@ return array(
         '4964' => array("show"=>0,'name' => '添加角色', 'controller' => 'role',		'action' => 'info'),
     )),
 
-    '5' => array('name' => '文章', 'icon' => 'xe616', 'sub' => array(
 
-        '51' => array("show"=>1,'name' => '文章数据', 'controller' => 'art',		'action' => 'data'),
-        '5101' => array("show"=>0,'name' => '--文章信息维护', 'controller' => 'art',		'action' => 'info'),
-        '5102' => array("show"=>0,'name' => '--文章删除', 'controller' => 'art',		'action' => 'del'),
-        '5103' => array("show"=>0,'name' => '--文章状态', 'controller' => 'art',		'action' => 'field'),
+    '12' => array('name' => '网址', 'icon' => 'xe616', 'sub' => array(
 
-        '52' => array("show"=>1,'name' => '添加文章', 'controller' => 'art',		'action' => 'info'),
-        '53' => array("show"=>1,'name' => '已锁定文章', 'controller' => 'art',		'action' => 'data','param'=>'lock=1'),
-        '54' => array("show"=>1,'name' => '未审核文章', 'controller' => 'art',		'action' => 'data','param'=>'status=0'),
+        '121' => array("show"=>1,'name' => '网址数据', 'controller' => 'website',		'action' => 'data'),
+        '12101' => array("show"=>0,'name' => '--网址信息维护', 'controller' => 'website',		'action' => 'info'),
+        '12102' => array("show"=>0,'name' => '--网址删除', 'controller' => 'website',		'action' => 'del'),
+        '12103' => array("show"=>0,'name' => '--网址状态', 'controller' => 'website',		'action' => 'field'),
 
-        '59' => array("show"=>1,'name' => '批量操作文章', 'controller' => 'art',		'action' => 'batch'),
-        '591' => array("show"=>1,'name' => '重名文章数据', 'controller' => 'art',		'action' => 'data', 'param'=>'repeat=1'),
+        '122' => array("show"=>1,'name' => '添加网址', 'controller' => 'website',		'action' => 'info'),
+        '123' => array("show"=>1,'name' => '已锁定网址', 'controller' => 'website',		'action' => 'data','param'=>'lock=1'),
+        '124' => array("show"=>1,'name' => '未审核网址', 'controller' => 'website',		'action' => 'data','param'=>'status=0'),
+
+        '129' => array("show"=>1,'name' => '批量操作网址', 'controller' => 'website',		'action' => 'batch'),
+        '1291' => array("show"=>1,'name' => '重名网址数据', 'controller' => 'website',		'action' => 'data', 'param'=>'repeat=1'),
     )),
 
     '6' => array('name' => '用户', 'icon' => 'xe62c', 'sub' => array(
@@ -206,19 +223,19 @@ return array(
         '9105' => array("show"=>0,'name' => '--采集文章', 'controller' => 'collect',		'action' => 'art'),
         '92' => array("show"=>0,'name' => '定时挂机', 'controller' => 'collect',		'action' => 'timing'),
 
-        '93' => array("show"=>1,'name' => '自定义资源库', 'controller' => 'collect',		'action' => 'index'),
-        '9301' => array("show"=>0,'name' => '--自定义资源库信息维护', 'controller' => 'collect',		'action' => 'info'),
-        '9302' => array("show"=>0,'name' => '--自定义资源库删除', 'controller' => 'collect',		'action' => 'del'),
+        '93' => array("show"=>1,'name' => '自定义资源', 'controller' => 'collect',		'action' => 'index'),
+        '9301' => array("show"=>0,'name' => '--自定义资源信息维护', 'controller' => 'collect',		'action' => 'info'),
+        '9302' => array("show"=>0,'name' => '--自定义资源删除', 'controller' => 'collect',		'action' => 'del'),
 
-        '94' => array("show"=>1,'name' => '自定义采集', 'controller' => 'cj',		'action' => 'index'),
-        '9401' => array("show"=>0,'name' => '--自定义采集信息维护', 'controller' => 'cj',		'action' => 'info'),
-        '9402' => array("show"=>0,'name' => '--自定义采集删除', 'controller' => 'cj',		'action' => 'del'),
-        '9403' => array("show"=>0,'name' => '--自定义采集发布方案', 'controller' => 'cj',		'action' => 'program'),
-        '9404' => array("show"=>0,'name' => '--自定义采集采集网址', 'controller' => 'cj',		'action' => 'col_url'),
-        '9405' => array("show"=>0,'name' => '--自定义采集采集内容', 'controller' => 'cj',		'action' => 'col_content'),
-        '9406' => array("show"=>0,'name' => '--自定义采集发布内容', 'controller' => 'cj',		'action' => 'publish'),
-        '9407' => array("show"=>0,'name' => '--自定义采集导出', 'controller' => 'cj',		'action' => 'export'),
-        '9408' => array("show"=>0,'name' => '--自定义采集导入', 'controller' => 'cj',		'action' => 'import'),
+        '94' => array("show"=>1,'name' => '自定义规则', 'controller' => 'cj',		'action' => 'index'),
+        '9401' => array("show"=>0,'name' => '--自定义规则信息维护', 'controller' => 'cj',		'action' => 'info'),
+        '9402' => array("show"=>0,'name' => '--自定义规则删除', 'controller' => 'cj',		'action' => 'del'),
+        '9403' => array("show"=>0,'name' => '--自定义规则发布方案', 'controller' => 'cj',		'action' => 'program'),
+        '9404' => array("show"=>0,'name' => '--自定义规则采集网址', 'controller' => 'cj',		'action' => 'col_url'),
+        '9405' => array("show"=>0,'name' => '--自定义规则采集内容', 'controller' => 'cj',		'action' => 'col_content'),
+        '9406' => array("show"=>0,'name' => '--自定义规则发布内容', 'controller' => 'cj',		'action' => 'publish'),
+        '9407' => array("show"=>0,'name' => '--自定义规则导出', 'controller' => 'cj',		'action' => 'export'),
+        '9408' => array("show"=>0,'name' => '--自定义规则导入', 'controller' => 'cj',		'action' => 'import'),
 
     )),
 
